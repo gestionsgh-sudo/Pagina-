@@ -3,16 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SGH | Tu Trámite, Resuelto</title>
+<title>SGH | Tu Trámite, Resuelto · Registro</title>
 <link rel="stylesheet" href="style.css">
-<!-- (Opcional) Si quieres Inter desde Google Fonts, añade el link, pero por privacidad puedes quedarte con system-ui -->
+<style>
+  /* Estilos mínimos para las pestañas de Registro/Acceso */
+  .auth-wrap{min-height:calc(100dvh - 80px);display:grid;place-items:center}
+  .auth{width:min(560px,92vw)}
+  .tabs{display:flex;gap:8px;margin-bottom:12px}
+  .tab{flex:1;text-align:center;padding:10px;border:1px solid var(--c-border);
+       background:#fff;border-radius:12px;font-weight:700;cursor:pointer}
+  .tab[aria-selected="true"]{background:color-mix(in srgb,var(--c-primary) 8%,#fff);border-color:color-mix(in srgb,var(--c-primary) 25%,#fff)}
+  .field{margin:10px 0}
+  .field label{font-weight:600;margin-bottom:6px;display:block}
+  .field input{width:100%;height:44px;border:1px solid var(--c-border);border-radius:12px;padding:0 12px;background:#fff}
+  .agree{display:flex;gap:8px;align-items:flex-start}
+  .muted{color:var(--c-muted);font-size:14px}
+  .center{display:flex;justify-content:center}
+</style>
 </head>
 <body>
 
-<!-- Barra de confianza RGPD -->
+<!-- Barra superior (cumplimiento) -->
 <div class="trustbar">
   <div class="container">
-    <!-- Icono escudo -->
     <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
       <path d="M12 3l7 3v6c0 5-3.5 9-7 9s-7-4-7-9V6l7-3z" stroke-width="1.6"/>
       <path d="M9 12l2 2 4-4" stroke-width="1.8"/>
@@ -21,7 +34,7 @@
   </div>
 </div>
 
-<!-- Header -->
+<!-- Cabecera mínima -->
 <header class="header">
   <div class="container">
     <a class="logo" href="index.html" aria-label="Inicio SGH">
@@ -29,174 +42,103 @@
       SGH | Tu Trámite, Resuelto
     </a>
     <nav class="nav" aria-label="principal">
-      <a href="#plantillas">Plantillas</a>
-      <a href="#como-funciona">Cómo funciona</a>
-      <a href="#seguridad">Seguridad</a>
-      <a href="contacto.html">Ayuda</a>
-      <a class="btn btn-primary" href="dgt-multas.html">Empezar</a>
+      <a href="aviso-legal.html">Legal</a>
+      <a href="privacidad.html">Privacidad</a>
+      <a href="cookies.html">Cookies</a>
+      <a class="btn btn-ghost" href="dgt-multas.html">Ir a DGT</a>
     </nav>
   </div>
 </header>
 
-<main class="container stack" id="top" style="padding-top:24px">
-  <!-- Héroe -->
-  <section class="hero card">
-    <h1>Documentos claros, listos para presentar.</h1>
-    <p>Tono serio, profesional y simple. Elige una plantilla y en minutos tendrás tu PDF preparado.</p>
+<main class="auth-wrap container">
+  <section class="auth card" aria-labelledby="titulo-auth">
+    <h1 id="titulo-auth" style="font-size:var(--h1);margin:0 0 6px;letter-spacing:-.02em">SGH | Tu Trámite, Resuelto</h1>
+    <p class="muted" style="margin:0 0 12px">Documentos claros, listos para presentar.</p>
 
-    <!-- Buscador + CTAs -->
-    <div class="stack" style="gap:16px">
-      <div class="search" role="search" aria-label="Buscar plantillas">
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <circle cx="11" cy="11" r="7" stroke-width="1.6"></circle>
-          <path d="M20 20l-3.5-3.5" stroke-width="1.6"></path>
-        </svg>
-        <input id="search" type="search" placeholder="Busca: DGT, herencias, padrón…" aria-label="Buscar">
-      </div>
-      <div style="display:flex;gap:10px;flex-wrap:wrap">
-        <a class="btn btn-secondary" href="#plantillas">Explorar plantillas</a>
-        <a class="btn btn-primary" href="dgt-multas.html">Crear mi documento</a>
-      </div>
+    <!-- Pestañas -->
+    <div role="tablist" aria-label="Registro o acceso" class="tabs">
+      <button id="t-reg" class="tab" role="tab" aria-selected="true" aria-controls="panel-reg">Crear cuenta</button>
+      <button id="t-log" class="tab" role="tab" aria-selected="false" aria-controls="panel-log">Entrar</button>
     </div>
-  </section>
 
-  <!-- Cómo funciona -->
-  <section id="como-funciona" class="stack">
-    <h2 style="font-size:var(--h2);margin:8px 0">Cómo funciona</h2>
-    <div class="row steps">
-      <div class="card step">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 6h16M4 12h16M4 18h10" stroke-width="1.6"/></svg>
+    <!-- Panel Registro -->
+    <div id="panel-reg" role="tabpanel" aria-labelledby="t-reg">
+      <form action="https://hook.eu2.make.com/a8h3mpvg6yfsjs53wajm4jk93mixl4bl" method="POST" id="form-reg">
+        <input type="hidden" name="form_name" value="registro">
+        <div class="field">
+          <label for="r-nombre">Nombre y apellidos *</label>
+          <input id="r-nombre" name="nombre_completo" required>
         </div>
-        <h3>1. Elige plantilla</h3>
-        <p>Selecciona el trámite: DGT, herencias y más.</p>
-      </div>
-      <div class="card step">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 7h16M4 12h10M4 17h7" stroke-width="1.6"/></svg>
+        <div class="field">
+          <label for="r-email">Correo electrónico *</label>
+          <input id="r-email" type="email" name="email" required>
         </div>
-        <h3>2. Responde sencillo</h3>
-        <p>Preguntas claras, sin jerga.</p>
-      </div>
-      <div class="card step">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 4h12v16H6zM9 8h6M9 12h6M9 16h6" stroke-width="1.6"/></svg>
+        <div class="field">
+          <label for="r-telefono">Teléfono <span class="muted">(opcional)</span></label>
+          <input id="r-telefono" name="telefono" placeholder="612 34 56 78">
         </div>
-        <h3>3. Generamos tu PDF</h3>
-        <p>Listo para Sede electrónica o REG.</p>
-      </div>
-      <div class="card step">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12l4 4L19 6" stroke-width="1.8"/></svg>
+        <div class="field agree">
+          <input id="r-rgpd" type="checkbox" name="acepto_rgpd" required>
+          <label for="r-rgpd" class="muted">
+            He leído y acepto la <a href="privacidad.html" target="_blank">Política de Privacidad</a> y el
+            <a href="aviso-legal.html" target="_blank">Aviso legal</a>. Esta página es <strong>no oficial</strong> del Estado.
+          </label>
         </div>
-        <h3>4. Checklist final</h3>
-        <p>Plazos, anexos y enlaces oficiales.</p>
-      </div>
+        <div class="center" style="gap:10px;margin-top:8px">
+          <button class="btn btn-primary" type="submit">Crear cuenta</button>
+          <a class="btn btn-secondary" href="dgt-multas.html">Usar sin registrarme</a>
+        </div>
+        <p class="muted" style="margin-top:12px">No guardamos contraseñas. Te enviaremos un correo de bienvenida con instrucciones.</p>
+      </form>
     </div>
-  </section>
 
-  <!-- Plantillas destacadas -->
-  <section id="plantillas" class="stack">
-    <h2 style="font-size:var(--h2);margin:8px 0">Plantillas destacadas</h2>
-    <div id="tpl-grid" class="row grid">
-      <!-- DGT -->
-      <article class="template" data-tags="dgt multas recurso alegaciones sanciones">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M7 20h10M12 4v12m-6 4h12a2 2 0 0 0 2-2V8l-4-4H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2z" stroke-width="1.4"/>
-          </svg>
+    <!-- Panel Acceso (enlace mágico por correo) -->
+    <div id="panel-log" role="tabpanel" aria-labelledby="t-log" hidden>
+      <form action="AQUI_TU_WEBHOOK_ACCESO" method="POST" id="form-log">
+        <input type="hidden" name="form_name" value="acceso">
+        <div class="field">
+          <label for="l-email">Correo electrónico *</label>
+          <input id="l-email" type="email" name="email" required>
         </div>
-        <h3>DGT · Alegaciones / Recurso</h3>
-        <p>20 días o 1 mes. Incluye anexos y checklist.</p>
-        <a href="dgt-multas.html" class="btn btn-secondary">Usar plantilla →</a>
-      </article>
-
-      <!-- Herencias -->
-      <article class="template" data-tags="herencias sucesiones aceptación inventario">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M4 7h16M4 12h16M4 17h10" stroke-width="1.4"/>
-          </svg>
+        <div class="center" style="gap:10px;margin-top:8px">
+          <button class="btn btn-primary" type="submit">Enviarme enlace de acceso</button>
+          <a class="btn btn-secondary" href="dgt-multas.html">Ir a DGT</a>
         </div>
-        <h3>Herencias (próximamente)</h3>
-        <p>Guía y modelos: aceptación, inventario, plusvalía.</p>
-        <a href="herencias.html" class="btn btn-secondary">Ver detalles →</a>
-      </article>
-
-      <!-- Placeholder otra -->
-      <article class="template" data-tags="domicilio padrón empadronamiento cambio">
-        <div class="icon-wrap">
-          <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path d="M3 11l9-7 9 7v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke-width="1.4"/>
-            <path d="M9 21V9h6v12" stroke-width="1.4"/>
-          </svg>
-        </div>
-        <h3>Cambio de domicilio (próx.)</h3>
-        <p>Modelo básico para administración local.</p>
-        <a href="#" class="btn btn-secondary" aria-disabled="true">Muy pronto</a>
-      </article>
+        <p class="muted" style="margin-top:12px">Recibirás un enlace temporal para entrar. Sin contraseñas.</p>
+      </form>
     </div>
-  </section>
 
-  <!-- Seguridad y cumplimiento -->
-  <section id="seguridad" class="stack">
-    <h2 style="font-size:var(--h2);margin:8px 0">Seguridad y cumplimiento</h2>
-    <ul class="bullets">
-      <li>
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M5 12l4 4L19 6" stroke-width="1.8"/></svg>
-        <div><strong>RGPD</strong><br><span class="small">Datos mínimos y control por parte del usuario.</span></div>
-      </li>
-      <li>
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3l7 3v6c0 5-3.5 9-7 9s-7-4-7-9V6l7-3z" stroke-width="1.6"/></svg>
-        <div><strong>Cifrado en tránsito</strong><br><span class="small">HTTPS extremo a extremo.</span></div>
-      </li>
-      <li>
-        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12m6-6H6" stroke-width="1.8"/></svg>
-        <div><strong>Transparencia</strong><br><span class="small">No somos web oficial del Estado; asistente automatizado.</span></div>
-      </li>
-    </ul>
-  </section>
-
-  <!-- CTA final -->
-  <section class="cta-band">
-    <div>
-      <h2 style="font-size:var(--h2);margin:0 0 6px">Trámites claros. Documentos listos en minutos.</h2>
-      <p class="small" style="color:#E6EEF6;margin:0">Sin ruido visual. Siempre en español. Con checklist y enlaces oficiales.</p>
-    </div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end">
-      <a class="btn btn-secondary" href="#plantillas">Elegir plantilla</a>
-      <a class="btn btn-primary" href="dgt-multas.html">Empezar</a>
+    <div class="notice" style="margin-top:16px">
+      <strong>Transparencia:</strong> Servicio automatizado y <strong>no oficial</strong> del Estado. No sustituye a profesionales
+      (abogado, gestor o administrador). Para casos complejos, consulta con un profesional.
     </div>
   </section>
 </main>
 
-<!-- Footer -->
 <footer class="footer">
   <div class="container cols">
     <div class="small">
-      <strong>Aviso:</strong> Página <b>no oficial</b> del Estado. Servicio automatizado para trámites sencillos y
-      <b>no</b> sustituye a profesionales (abogado, gestor o administrador).
+      © SGH – Datos mínimos, sin publicidad ni seguimiento. <a href="cookies.html">Cookies</a>.
     </div>
     <div style="display:flex;gap:14px;flex-wrap:wrap">
       <a href="aviso-legal.html">Aviso legal</a>
       <a href="privacidad.html">Privacidad</a>
-      <a href="cookies.html">Cookies</a>
       <a href="contacto.html">Contacto</a>
     </div>
   </div>
 </footer>
 
 <script>
-/* Buscador de plantillas (filtra por texto) */
-const input = document.getElementById('search');
-const cards = [...document.querySelectorAll('#tpl-grid .template')];
-input?.addEventListener('input', e=>{
-  const q = e.target.value.trim().toLowerCase();
-  cards.forEach(c=>{
-    const text = (c.innerText + ' ' + (c.dataset.tags||'')).toLowerCase();
-    c.style.display = text.includes(q) ? '' : 'none';
-  });
-});
+/* Tabs accesibles */
+const tReg=document.getElementById('t-reg'), tLog=document.getElementById('t-log');
+const pReg=document.getElementById('panel-reg'), pLog=document.getElementById('panel-log');
+function sel(tab){
+  const reg = tab==='reg';
+  tReg.setAttribute('aria-selected', reg); tLog.setAttribute('aria-selected', !reg);
+  pReg.hidden = !reg; pLog.hidden = reg;
+}
+tReg.addEventListener('click',()=>sel('reg'));
+tLog.addEventListener('click',()=>sel('log'));
 </script>
 </body>
 </html>
